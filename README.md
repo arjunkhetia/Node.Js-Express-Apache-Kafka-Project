@@ -1,4 +1,4 @@
-# Node-Express Project   ![Version][version-image]
+# Node-Express-Apache-Kafka Project   ![Version][version-image]
 
 ![Linux Build][linuxbuild-image]
 ![Windows Build][windowsbuild-image]
@@ -7,10 +7,10 @@
 ![Dependency Status][dependency-image]
 ![devDependencies Status][devdependency-image]
 
-The quickest way to get start with Node.Js & Express, just clone the project:
+The quickest way to get start with Node.Js, Express & Apache Kafka, just clone the project:
 
 ```bash
-$ git clone https://github.com/arjunkhetia/Node.Js-Express-Project.git
+$ git clone https://github.com/arjunkhetia/Node.Js-Express-Apache-Kafka-Project.git
 ```
 
 Install dependencies:
@@ -24,6 +24,26 @@ Start Express.js app at `http://localhost:3000/`:
 ```bash
 $ npm start
 ```
+
+# Apache Kafka (kafka.js)
+
+Kafka is a messaging system that safely moves data between systems. Depending on how each component is configured, it can act as a transport for real-time event tracking or as a replicated distributed database. Although it is commonly referred to as a queue, it is more accurate to say that it is something in between a queue and a database, with attributes and tradeoffs from both types of systems.
+
+| **Term**          | **Description**                                                                                                                                                                                                                                                                                                                          |
+|-------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Cluster           | The collective group of machines that Kafka is running on.                                                                                                                                                                                                                                                                               |
+| Broker            | A single Kafka instance.                                                                                                                                                                                                                                                                                                                 |
+| Topic             | Topics are used to organize data. You always read and write to and from a particular topic.                                                                                                                                                                                                                                              |
+| Partition         | Data in a topic is spread across a number of partitions. Each partition can be thought of as a log file, ordered by time. To guarantee that you read messages in the correct order, only one member of a consumer group can read from a particular partition at a time.                                                                  |
+| Producer          | A client that writes data to one or more Kafka topics.                                                                                                                                                                                                                                                                                   |
+| Consumer          | A client that reads data from one or more Kafka topics.                                                                                                                                                                                                                                                                                  |
+| Replica           | Partitions are typically replicated to one or more brokers to avoid data loss.                                                                                                                                                                                                                                                           |
+| Leader            | Although a partition may be replicated to one or more brokers, a single broker is elected the leader for that partition, and is the only one who is allowed to write or read to/from that partition.                                                                                                                                     |
+| Consumer group    | A collective group of consumer instances, identified by a groupId. In a horizontally scaled application, each instance would be a consumer and together they would act as a consumer group.                                                                                                                                              |
+| Group Coordinator | An instance in the consumer group that is responsible for assigning partitions to consume from to the consumers in the group.                                                                                                                                                                                                            |
+| Offset            | A certain point in the partition log. When a consumer has consumed a message, it "commits" that offset, meaning that it tells the broker that the consumer group has consumed that message. If the consumer group is restarted, it will restart from the highest committed offset.                                                       |
+| Rebalance         | When a consumer has joined or left a consumer group (such as during booting or shutdown), the group has to "rebalance", meaning that a group coordinator has to be chosen and partitions need to be assigned to the members of the consumer group.                                                                                       |
+| Heartbeat         | The mechanism by which the cluster knows which consumers are alive. Every now and then (heartbeatInterval), each consumer has to send a heartbeat request to the cluster leader. If one fails to do so for a certain period (sessionTimeout), it is considered dead and will be removed from the consumer group, triggering a rebalance. |
 
 # Nodemon
 
@@ -157,7 +177,7 @@ app.use(require('express-status-monitor')({
 }));
 ```
 
-![Monitoring Page](https://github.com/arjunkhetia/Node.Js-Express-Project/blob/master/public/status-monitor.png "Monitoring Page")
+![Monitoring Page](https://github.com/arjunkhetia/Node.Js-Express-Apache-Kafka-Project/blob/master/public/status-monitor.png "Monitoring Page")
 
 [version-image]: https://img.shields.io/badge/Version-1.0.0-orange.svg
 [linuxbuild-image]: https://img.shields.io/badge/Linux-passing-brightgreen.svg

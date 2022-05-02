@@ -38,6 +38,7 @@ if (cluster.isWorker) {
   var debug = require('debug')('node-express-apache-kafka-project:server');
   var http = require('http');
   var ON_DEATH = require('death');
+  var kafka = require("../kafka");
   /**
    * Get port from environment and store in Express.
    */
@@ -107,6 +108,7 @@ if (cluster.isWorker) {
    * It sets the callback on SIGINT, SIGQUIT & SIGTERM.
    */
    ON_DEATH(function(signal, err) {
+     kafka.disconnect();
      console.log('\nServer is going down now...');
      server.close();
      process.exit();

@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
 var { create } = require('express-handlebars');
 var logger = require('morgan');
 var loggerutil = require('./utilities/logger');
@@ -12,6 +11,7 @@ var fs = require('fs');
 var rfs = require('rotating-file-stream');
 var helmet = require('helmet');
 var compression = require('compression');
+var kafka = require('./kafka');
 
 // Defining routes
 var routes = require('./routes');
@@ -113,8 +113,8 @@ app.use(logger(':remote-addr :remote-user :datetime :req[header] :method :url HT
 // Helmet helps for securing Express apps by setting various HTTP headers
 app.use(helmet());
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -154,5 +154,7 @@ process.on('uncaughtException', (error) => {
    console.error('Uncaught Exception is thrown with ',error+'\n');
    process.exit();
 });
+
+kafka.connect();
 
 module.exports = app;
