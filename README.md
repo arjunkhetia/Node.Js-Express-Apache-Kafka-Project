@@ -82,15 +82,15 @@ Kafdrop is a web UI for viewing Kafka topics and browsing consumer groups. The t
 
 ## Kafdrop Screen - 
 
-![Monitoring Page](https://github.com/arjunkhetia/Node.Js-Express-Apache-Kafka-Project/blob/master/public/kafdrop.png "Monitoring Page")
+![Monitoring Page](https://github.com/arjunkhetia/Node.Js-Express-Apache-Kafka-Project/blob/main/public/kafdrop.png "Monitoring Page")
 
 ## API Response on HTML Page - 
 
-![Monitoring Page](https://github.com/arjunkhetia/Node.Js-Express-Apache-Kafka-Project/blob/master/public/html.png "Monitoring Page")
+![Monitoring Page](https://github.com/arjunkhetia/Node.Js-Express-Apache-Kafka-Project/blob/main/public/html.png "Monitoring Page")
 
 ## API Call on Postman - 
 
-![Monitoring Page](https://github.com/arjunkhetia/Node.Js-Express-Apache-Kafka-Project/blob/master/public/postman.png "Monitoring Page")
+![Monitoring Page](https://github.com/arjunkhetia/Node.Js-Express-Apache-Kafka-Project/blob/main/public/postman.png "Monitoring Page")
 
 # Nodemon
 
