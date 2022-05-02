@@ -45,6 +45,53 @@ Kafka is a messaging system that safely moves data between systems. Depending on
 | Rebalance         | When a consumer has joined or left a consumer group (such as during booting or shutdown), the group has to "rebalance", meaning that a group coordinator has to be chosen and partitions need to be assigned to the members of the consumer group.                                                                                       |
 | Heartbeat         | The mechanism by which the cluster knows which consumers are alive. Every now and then (heartbeatInterval), each consumer has to send a heartbeat request to the cluster leader. If one fails to do so for a certain period (sessionTimeout), it is considered dead and will be removed from the consumer group, triggering a rebalance. |
 
+```js
+const { Kafka, logLevel, CompressionTypes } = require("kafkajs");
+const config = {
+  clientId: "kafka-app",  // A logical identifier of an application. Can be used by brokers to apply quotas or trace requests to a specific application.
+  brokers: ["localhost:9092"],  // Brokers is kafka servers of a statically configured list.
+  connectionTimeout: 1000,  // Time in milliseconds to wait for a successful connection.
+  requestTimeout: 30000,  // Time in milliseconds to wait for a successful request.
+  ssl: false,  // The ssl option can be used to configure the TLS sockets.
+  logLevel: logLevel.INFO, // NOTHING, ERROR, WARN, INFO, and DEBUG
+  retry: {  // The retry option can be used to set the configuration of the retry mechanism, which is used to retry connections and API calls to Kafka (when using producers or consumers).
+    maxRetryTime: 30000,  // Maximum wait time for a retry in milliseconds.
+    initialRetryTime: 300,  // Initial value used to calculate the retry in milliseconds.
+    retries: 5,  // Max number of retries per call.
+    restartOnFailure: async () => true, // Only used in consumer. An async function that will be invoked after the consumer exhausts all retries, to decide whether or not to restart the consumer (essentially resetting consumer.run).
+  },
+};
+const kafka = new Kafka(config);
+const admin = kafka.admin();
+const producerConfig = {
+  allowAutoTopicCreation: true,
+  transactionTimeout: 60000,
+};
+const producer = kafka.producer(producerConfig);
+const consumerConfig = {
+  groupId: "kafka-group",
+  sessionTimeout: 30000,
+  allowAutoTopicCreation: true,
+};
+const consumer = kafka.consumer(consumerConfig);
+```
+
+# Kafdrop
+
+Kafdrop is a web UI for viewing Kafka topics and browsing consumer groups. The tool displays information such as brokers, topics, partitions, consumers, and lets you view messages.
+
+## Kafdrop Screen - 
+
+![Monitoring Page](https://github.com/arjunkhetia/Node.Js-Express-Apache-Kafka-Project/blob/master/public/kafdrop.png "Monitoring Page")
+
+## API Response on HTML Page - 
+
+![Monitoring Page](https://github.com/arjunkhetia/Node.Js-Express-Apache-Kafka-Project/blob/master/public/html.png "Monitoring Page")
+
+## API Call on Postman - 
+
+![Monitoring Page](https://github.com/arjunkhetia/Node.Js-Express-Apache-Kafka-Project/blob/master/public/postman.png "Monitoring Page")
+
 # Nodemon
 
 Nodemon will watch the files in the directory in which nodemon was started, and if any files change, nodemon will automatically restart your node application.
